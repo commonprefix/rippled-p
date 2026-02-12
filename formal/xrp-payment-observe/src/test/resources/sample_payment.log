@@ -1,0 +1,3 @@
+POBSERVE|1706000001000|PAYMENT|sender=0|receiver=1|amount=100000000|fee=10|status=SUCCESS|sbal_before=10000000000|sbal_after=9899999990|rbal_before=10000000000|rbal_after=10100000000
+POBSERVE|1706000002000|PAYMENT|sender=1|receiver=0|amount=50000000|fee=10|status=SUCCESS|sbal_before=10100000000|sbal_after=10049999990|rbal_before=9899999990|rbal_after=9949999990
+POBSERVE|1706000003000|PAYMENT|sender=0|receiver=1|amount=999999999999|fee=10|status=FAIL|sbal_before=9949999990|sbal_after=9949999990|rbal_before=10049999990|rbal_after=10049999990
