@@ -1,0 +1,8 @@
+# P compiler output
+*/PEx/
+*/PObserve/
+*/PCheckerOutput/
+PCheckerOutput/
+
+# Maven build output
+*/target/
