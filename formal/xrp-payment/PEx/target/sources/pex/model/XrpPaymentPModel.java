@@ -630,14 +630,14 @@ public class XrpPaymentPModel implements PModel {
             PInt var_$tmp19 =
                 new PInt(0);
             
-            PBool var_$tmp20 =
+            PInt var_$tmp20 =
+                new PInt(0);
+            
+            PBool var_$tmp21 =
                 new PBool(false);
             
-            PString var_$tmp21 =
+            PString var_$tmp22 =
                 new PString("");
-            
-            PInt var_$tmp22 =
-                new PInt(0);
             
             PInt var_$tmp23 =
                 new PInt(0);
@@ -645,23 +645,23 @@ public class XrpPaymentPModel implements PModel {
             PInt var_$tmp24 =
                 new PInt(0);
             
-            PString var_$tmp25 =
-                new PString("");
+            PInt var_$tmp25 =
+                new PInt(0);
             
             PString var_$tmp26 =
                 new PString("");
             
-            PInt var_$tmp27 =
-                new PInt(0);
+            PString var_$tmp27 =
+                new PString("");
             
             PInt var_$tmp28 =
                 new PInt(0);
             
-            PBool var_$tmp29 =
-                new PBool(false);
+            PInt var_$tmp29 =
+                new PInt(0);
             
-            PString var_$tmp30 =
-                new PString("");
+            PBool var_$tmp30 =
+                new PBool(false);
             
             PString var_$tmp31 =
                 new PString("");
@@ -669,22 +669,25 @@ public class XrpPaymentPModel implements PModel {
             PString var_$tmp32 =
                 new PString("");
             
-            PInt var_$tmp33 =
-                new PInt(0);
+            PString var_$tmp33 =
+                new PString("");
             
             PInt var_$tmp34 =
                 new PInt(0);
             
-            PBool var_$tmp35 =
-                new PBool(false);
+            PInt var_$tmp35 =
+                new PInt(0);
             
-            PString var_$tmp36 =
-                new PString("");
+            PBool var_$tmp36 =
+                new PBool(false);
             
             PString var_$tmp37 =
                 new PString("");
             
             PString var_$tmp38 =
+                new PString("");
+            
+            PString var_$tmp39 =
                 new PString("");
             
             PEnum temp_var_69;
@@ -779,110 +782,114 @@ public class XrpPaymentPModel implements PModel {
                 temp_var_90 = (PInt) (var_$tmp17).add(var_$tmp18);
                 var_$tmp19 = temp_var_90;
                 
-                PBool temp_var_91;
-                temp_var_91 = (PBool) new PBool(PValue.isEqual(var_$tmp16, var_$tmp19));
+                PInt temp_var_91;
+                temp_var_91 = (PInt) (var_$tmp19).add(new PInt(1));
                 var_$tmp20 = temp_var_91;
                 
-                PBool temp_var_92 = var_$tmp20;
-                if (temp_var_92.getValue()) {
+                PBool temp_var_92;
+                temp_var_92 = (PBool) new PBool(PValue.isEqual(var_$tmp16, var_$tmp20));
+                var_$tmp21 = temp_var_92;
+                
+                PBool temp_var_93 = var_$tmp21;
+                if (temp_var_93.getValue()) {
                     // 'then' branch
                 }
                 else {
                     // 'else' branch
-                    PString temp_var_93;
-                    temp_var_93 = (PString) new PString("PSpec/XrpConservation.p:22:17");
-                    var_$tmp21 = temp_var_93;
-                    
-                    PInt temp_var_94;
-                    temp_var_94 = (PInt) ((PInt)(((PNamedTuple)var_resp).getField("receiverBalAfter")));
+                    PString temp_var_94;
+                    temp_var_94 = (PString) new PString("PSpec/XrpConservation.p:22:17");
                     var_$tmp22 = temp_var_94;
                     
                     PInt temp_var_95;
-                    temp_var_95 = (PInt) ((PInt)(((PNamedTuple)var_resp).getField("receiverBalBefore")));
+                    temp_var_95 = (PInt) ((PInt)(((PNamedTuple)var_resp).getField("receiverBalAfter")));
                     var_$tmp23 = temp_var_95;
                     
                     PInt temp_var_96;
-                    temp_var_96 = (PInt) ((PInt)(((PNamedTuple)var_resp).getField("amount")));
+                    temp_var_96 = (PInt) ((PInt)(((PNamedTuple)var_resp).getField("receiverBalBefore")));
                     var_$tmp24 = temp_var_96;
                     
-                    PString temp_var_97;
-                    temp_var_97 = (PString) new PString("Receiver balance wrong: {0} != {1} + {2}", var_$tmp22, var_$tmp23, var_$tmp24);
+                    PInt temp_var_97;
+                    temp_var_97 = (PInt) ((PInt)(((PNamedTuple)var_resp).getField("amount")));
                     var_$tmp25 = temp_var_97;
                     
                     PString temp_var_98;
-                    temp_var_98 = (PString) new PString("{0} {1}", var_$tmp21, var_$tmp25);
+                    temp_var_98 = (PString) new PString("Receiver balance wrong: {0} != {1} + {2} + 1", var_$tmp23, var_$tmp24, var_$tmp25);
                     var_$tmp26 = temp_var_98;
                     
-                    Assert.fromModel((var_$tmp20).getValue(), var_$tmp26);
+                    PString temp_var_99;
+                    temp_var_99 = (PString) new PString("{0} {1}", var_$tmp22, var_$tmp26);
+                    var_$tmp27 = temp_var_99;
+                    
+                    Assert.fromModel((var_$tmp21).getValue(), var_$tmp27);
                 }
                 
             }
             else {
                 // 'else' branch
-                PInt temp_var_99;
-                temp_var_99 = (PInt) ((PInt)(((PNamedTuple)var_resp).getField("senderBalAfter")));
-                var_$tmp27 = temp_var_99;
-                
                 PInt temp_var_100;
-                temp_var_100 = (PInt) ((PInt)(((PNamedTuple)var_resp).getField("senderBalBefore")));
+                temp_var_100 = (PInt) ((PInt)(((PNamedTuple)var_resp).getField("senderBalAfter")));
                 var_$tmp28 = temp_var_100;
                 
-                PBool temp_var_101;
-                temp_var_101 = (PBool) new PBool(PValue.isEqual(var_$tmp27, var_$tmp28));
+                PInt temp_var_101;
+                temp_var_101 = (PInt) ((PInt)(((PNamedTuple)var_resp).getField("senderBalBefore")));
                 var_$tmp29 = temp_var_101;
                 
-                PBool temp_var_102 = var_$tmp29;
-                if (temp_var_102.getValue()) {
+                PBool temp_var_102;
+                temp_var_102 = (PBool) new PBool(PValue.isEqual(var_$tmp28, var_$tmp29));
+                var_$tmp30 = temp_var_102;
+                
+                PBool temp_var_103 = var_$tmp30;
+                if (temp_var_103.getValue()) {
                     // 'then' branch
                 }
                 else {
                     // 'else' branch
-                    PString temp_var_103;
-                    temp_var_103 = (PString) new PString("PSpec/XrpConservation.p:27:17");
-                    var_$tmp30 = temp_var_103;
-                    
                     PString temp_var_104;
-                    temp_var_104 = (PString) new PString("Sender balance changed on failed payment");
+                    temp_var_104 = (PString) new PString("PSpec/XrpConservation.p:27:17");
                     var_$tmp31 = temp_var_104;
                     
                     PString temp_var_105;
-                    temp_var_105 = (PString) new PString("{0} {1}", var_$tmp30, var_$tmp31);
+                    temp_var_105 = (PString) new PString("Sender balance changed on failed payment");
                     var_$tmp32 = temp_var_105;
                     
-                    Assert.fromModel((var_$tmp29).getValue(), var_$tmp32);
+                    PString temp_var_106;
+                    temp_var_106 = (PString) new PString("{0} {1}", var_$tmp31, var_$tmp32);
+                    var_$tmp33 = temp_var_106;
+                    
+                    Assert.fromModel((var_$tmp30).getValue(), var_$tmp33);
                 }
                 
-                PInt temp_var_106;
-                temp_var_106 = (PInt) ((PInt)(((PNamedTuple)var_resp).getField("receiverBalAfter")));
-                var_$tmp33 = temp_var_106;
-                
                 PInt temp_var_107;
-                temp_var_107 = (PInt) ((PInt)(((PNamedTuple)var_resp).getField("receiverBalBefore")));
+                temp_var_107 = (PInt) ((PInt)(((PNamedTuple)var_resp).getField("receiverBalAfter")));
                 var_$tmp34 = temp_var_107;
                 
-                PBool temp_var_108;
-                temp_var_108 = (PBool) new PBool(PValue.isEqual(var_$tmp33, var_$tmp34));
+                PInt temp_var_108;
+                temp_var_108 = (PInt) ((PInt)(((PNamedTuple)var_resp).getField("receiverBalBefore")));
                 var_$tmp35 = temp_var_108;
                 
-                PBool temp_var_109 = var_$tmp35;
-                if (temp_var_109.getValue()) {
+                PBool temp_var_109;
+                temp_var_109 = (PBool) new PBool(PValue.isEqual(var_$tmp34, var_$tmp35));
+                var_$tmp36 = temp_var_109;
+                
+                PBool temp_var_110 = var_$tmp36;
+                if (temp_var_110.getValue()) {
                     // 'then' branch
                 }
                 else {
                     // 'else' branch
-                    PString temp_var_110;
-                    temp_var_110 = (PString) new PString("PSpec/XrpConservation.p:29:17");
-                    var_$tmp36 = temp_var_110;
-                    
                     PString temp_var_111;
-                    temp_var_111 = (PString) new PString("Receiver balance changed on failed payment");
+                    temp_var_111 = (PString) new PString("PSpec/XrpConservation.p:29:17");
                     var_$tmp37 = temp_var_111;
                     
                     PString temp_var_112;
-                    temp_var_112 = (PString) new PString("{0} {1}", var_$tmp36, var_$tmp37);
+                    temp_var_112 = (PString) new PString("Receiver balance changed on failed payment");
                     var_$tmp38 = temp_var_112;
                     
-                    Assert.fromModel((var_$tmp35).getValue(), var_$tmp38);
+                    PString temp_var_113;
+                    temp_var_113 = (PString) new PString("{0} {1}", var_$tmp37, var_$tmp38);
+                    var_$tmp39 = temp_var_113;
+                    
+                    Assert.fromModel((var_$tmp36).getValue(), var_$tmp39);
                 }
                 
             }
@@ -952,55 +959,55 @@ public class XrpPaymentPModel implements PModel {
             PMachineValue var_$tmp5 =
                 null;
             
-            PMap temp_var_113 = (PMap) var_balances;    
-            PInt temp_var_115 = new PInt(0);
-            PInt temp_var_114;
-            temp_var_114 = (PInt) new PInt(10000);
-            temp_var_113 = temp_var_113.put(temp_var_115, temp_var_114);
-            var_balances = temp_var_113;
+            PMap temp_var_114 = (PMap) var_balances;    
+            PInt temp_var_116 = new PInt(0);
+            PInt temp_var_115;
+            temp_var_115 = (PInt) new PInt(10000);
+            temp_var_114 = temp_var_114.put(temp_var_116, temp_var_115);
+            var_balances = temp_var_114;
             
-            PMap temp_var_116 = (PMap) var_balances;    
-            PInt temp_var_118 = new PInt(1);
-            PInt temp_var_117;
-            temp_var_117 = (PInt) new PInt(5000);
-            temp_var_116 = temp_var_116.put(temp_var_118, temp_var_117);
-            var_balances = temp_var_116;
+            PMap temp_var_117 = (PMap) var_balances;    
+            PInt temp_var_119 = new PInt(1);
+            PInt temp_var_118;
+            temp_var_118 = (PInt) new PInt(5000);
+            temp_var_117 = temp_var_117.put(temp_var_119, temp_var_118);
+            var_balances = temp_var_117;
             
-            PMap temp_var_119;
-            temp_var_119 = (PMap) var_balances;
-            var_$tmp0 = temp_var_119;
-            
-            PInt temp_var_120;
-            temp_var_120 = (PInt) new PInt(12);
-            var_$tmp1 = temp_var_120;
+            PMap temp_var_120;
+            temp_var_120 = (PMap) var_balances;
+            var_$tmp0 = temp_var_120;
             
             PInt temp_var_121;
-            temp_var_121 = (PInt) new PInt(200);
-            var_$tmp2 = temp_var_121;
+            temp_var_121 = (PInt) new PInt(12);
+            var_$tmp1 = temp_var_121;
             
-            PMachineValue temp_var_122;
-            temp_var_122 = (PMachineValue) new PMachineValue(this);
-            var_$tmp3 = temp_var_122;
+            PInt temp_var_122;
+            temp_var_122 = (PInt) new PInt(200);
+            var_$tmp2 = temp_var_122;
             
-            PNamedTuple temp_var_123;
-            temp_var_123 = (PNamedTuple) new PNamedTuple(
+            PMachineValue temp_var_123;
+            temp_var_123 = (PMachineValue) new PMachineValue(this);
+            var_$tmp3 = temp_var_123;
+            
+            PNamedTuple temp_var_124;
+            temp_var_124 = (PNamedTuple) new PNamedTuple(
                 List.of("balances", "fee", "reserve", "client"), 
                 Arrays.asList(var_$tmp0, var_$tmp1, var_$tmp2, var_$tmp3)
             )
             ;
-            var_$tmp4 = temp_var_123;
-            
-            PMachineValue temp_var_124;
-            temp_var_124 = (PMachineValue) currentMachine.create(PaymentEngine.class, var_$tmp4);
-            var_$tmp5 = temp_var_124;
+            var_$tmp4 = temp_var_124;
             
             PMachineValue temp_var_125;
-            temp_var_125 = (PMachineValue) var_$tmp5;
-            var_engine = temp_var_125;
+            temp_var_125 = (PMachineValue) currentMachine.create(PaymentEngine.class, var_$tmp4);
+            var_$tmp5 = temp_var_125;
             
-            PInt temp_var_126;
-            temp_var_126 = (PInt) new PInt(3);
-            var_paymentsLeft = temp_var_126;
+            PMachineValue temp_var_126;
+            temp_var_126 = (PMachineValue) var_$tmp5;
+            var_engine = temp_var_126;
+            
+            PInt temp_var_127;
+            temp_var_127 = (PInt) new PInt(3);
+            var_paymentsLeft = temp_var_127;
             
             currentMachine.gotoState(SendPayments, null);
             return;
@@ -1098,160 +1105,160 @@ public class XrpPaymentPModel implements PModel {
             PInt var_$tmp28 =
                 new PInt(0);
             
-            PBool temp_var_127;
-            temp_var_127 = (PBool) (var_paymentsLeft).gt(new PInt(0));
-            var_$tmp0 = temp_var_127;
+            PBool temp_var_128;
+            temp_var_128 = (PBool) (var_paymentsLeft).gt(new PInt(0));
+            var_$tmp0 = temp_var_128;
             
-            PBool temp_var_128 = var_$tmp0;
-            if (temp_var_128.getValue()) {
+            PBool temp_var_129 = var_$tmp0;
+            if (temp_var_129.getValue()) {
                 // 'then' branch
-                PBool temp_var_129;
-                temp_var_129 = (PBool) PExGlobal.getScheduler().getRandomBool("PTst/TestDriver.p:33:21");
-                var_$tmp1 = temp_var_129;
+                PBool temp_var_130;
+                temp_var_130 = (PBool) PExGlobal.getScheduler().getRandomBool("PTst/TestDriver.p:33:21");
+                var_$tmp1 = temp_var_130;
                 
-                PBool temp_var_130 = var_$tmp1;
-                if (temp_var_130.getValue()) {
+                PBool temp_var_131 = var_$tmp1;
+                if (temp_var_131.getValue()) {
                     // 'then' branch
-                    PMachineValue temp_var_131;
-                    temp_var_131 = (PMachineValue) var_engine;
-                    var_$tmp2 = temp_var_131;
+                    PMachineValue temp_var_132;
+                    temp_var_132 = (PMachineValue) var_engine;
+                    var_$tmp2 = temp_var_132;
                     
-                    Event temp_var_132;
-                    temp_var_132 = (Event) new Event(ePaymentReq);
-                    var_$tmp3 = temp_var_132;
-                    
-                    PInt temp_var_133;
-                    temp_var_133 = (PInt) new PInt(0);
-                    var_$tmp4 = temp_var_133;
+                    Event temp_var_133;
+                    temp_var_133 = (Event) new Event(ePaymentReq);
+                    var_$tmp3 = temp_var_133;
                     
                     PInt temp_var_134;
-                    temp_var_134 = (PInt) new PInt(1);
-                    var_$tmp5 = temp_var_134;
+                    temp_var_134 = (PInt) new PInt(0);
+                    var_$tmp4 = temp_var_134;
                     
                     PInt temp_var_135;
-                    temp_var_135 = (PInt) new PInt(500);
-                    var_$tmp6 = temp_var_135;
+                    temp_var_135 = (PInt) new PInt(1);
+                    var_$tmp5 = temp_var_135;
                     
-                    PNamedTuple temp_var_136;
-                    temp_var_136 = (PNamedTuple) new PNamedTuple(
+                    PInt temp_var_136;
+                    temp_var_136 = (PInt) new PInt(500);
+                    var_$tmp6 = temp_var_136;
+                    
+                    PNamedTuple temp_var_137;
+                    temp_var_137 = (PNamedTuple) new PNamedTuple(
                         List.of("sender", "receiver", "amount"), 
                         Arrays.asList(var_$tmp4, var_$tmp5, var_$tmp6)
                     )
                     ;
-                    var_$tmp7 = temp_var_136;
+                    var_$tmp7 = temp_var_137;
                     
                     currentMachine.sendEvent(var_$tmp2, var_$tmp3, var_$tmp7);
                     
                 }
                 else {
                     // 'else' branch
-                    PBool temp_var_137;
-                    temp_var_137 = (PBool) PExGlobal.getScheduler().getRandomBool("PTst/TestDriver.p:37:28");
-                    var_$tmp8 = temp_var_137;
+                    PBool temp_var_138;
+                    temp_var_138 = (PBool) PExGlobal.getScheduler().getRandomBool("PTst/TestDriver.p:37:28");
+                    var_$tmp8 = temp_var_138;
                     
-                    PBool temp_var_138 = var_$tmp8;
-                    if (temp_var_138.getValue()) {
+                    PBool temp_var_139 = var_$tmp8;
+                    if (temp_var_139.getValue()) {
                         // 'then' branch
-                        PMachineValue temp_var_139;
-                        temp_var_139 = (PMachineValue) var_engine;
-                        var_$tmp9 = temp_var_139;
+                        PMachineValue temp_var_140;
+                        temp_var_140 = (PMachineValue) var_engine;
+                        var_$tmp9 = temp_var_140;
                         
-                        Event temp_var_140;
-                        temp_var_140 = (Event) new Event(ePaymentReq);
-                        var_$tmp10 = temp_var_140;
-                        
-                        PInt temp_var_141;
-                        temp_var_141 = (PInt) new PInt(0);
-                        var_$tmp11 = temp_var_141;
+                        Event temp_var_141;
+                        temp_var_141 = (Event) new Event(ePaymentReq);
+                        var_$tmp10 = temp_var_141;
                         
                         PInt temp_var_142;
-                        temp_var_142 = (PInt) new PInt(1);
-                        var_$tmp12 = temp_var_142;
+                        temp_var_142 = (PInt) new PInt(0);
+                        var_$tmp11 = temp_var_142;
                         
                         PInt temp_var_143;
-                        temp_var_143 = (PInt) new PInt(9000);
-                        var_$tmp13 = temp_var_143;
+                        temp_var_143 = (PInt) new PInt(1);
+                        var_$tmp12 = temp_var_143;
                         
-                        PNamedTuple temp_var_144;
-                        temp_var_144 = (PNamedTuple) new PNamedTuple(
+                        PInt temp_var_144;
+                        temp_var_144 = (PInt) new PInt(9000);
+                        var_$tmp13 = temp_var_144;
+                        
+                        PNamedTuple temp_var_145;
+                        temp_var_145 = (PNamedTuple) new PNamedTuple(
                             List.of("sender", "receiver", "amount"), 
                             Arrays.asList(var_$tmp11, var_$tmp12, var_$tmp13)
                         )
                         ;
-                        var_$tmp14 = temp_var_144;
+                        var_$tmp14 = temp_var_145;
                         
                         currentMachine.sendEvent(var_$tmp9, var_$tmp10, var_$tmp14);
                         
                     }
                     else {
                         // 'else' branch
-                        PBool temp_var_145;
-                        temp_var_145 = (PBool) PExGlobal.getScheduler().getRandomBool("PTst/TestDriver.p:41:28");
-                        var_$tmp15 = temp_var_145;
+                        PBool temp_var_146;
+                        temp_var_146 = (PBool) PExGlobal.getScheduler().getRandomBool("PTst/TestDriver.p:41:28");
+                        var_$tmp15 = temp_var_146;
                         
-                        PBool temp_var_146 = var_$tmp15;
-                        if (temp_var_146.getValue()) {
+                        PBool temp_var_147 = var_$tmp15;
+                        if (temp_var_147.getValue()) {
                             // 'then' branch
-                            PMachineValue temp_var_147;
-                            temp_var_147 = (PMachineValue) var_engine;
-                            var_$tmp16 = temp_var_147;
+                            PMachineValue temp_var_148;
+                            temp_var_148 = (PMachineValue) var_engine;
+                            var_$tmp16 = temp_var_148;
                             
-                            Event temp_var_148;
-                            temp_var_148 = (Event) new Event(ePaymentReq);
-                            var_$tmp17 = temp_var_148;
-                            
-                            PInt temp_var_149;
-                            temp_var_149 = (PInt) new PInt(1);
-                            var_$tmp18 = temp_var_149;
+                            Event temp_var_149;
+                            temp_var_149 = (Event) new Event(ePaymentReq);
+                            var_$tmp17 = temp_var_149;
                             
                             PInt temp_var_150;
-                            temp_var_150 = (PInt) new PInt(0);
-                            var_$tmp19 = temp_var_150;
+                            temp_var_150 = (PInt) new PInt(1);
+                            var_$tmp18 = temp_var_150;
                             
                             PInt temp_var_151;
-                            temp_var_151 = (PInt) new PInt(1000);
-                            var_$tmp20 = temp_var_151;
+                            temp_var_151 = (PInt) new PInt(0);
+                            var_$tmp19 = temp_var_151;
                             
-                            PNamedTuple temp_var_152;
-                            temp_var_152 = (PNamedTuple) new PNamedTuple(
+                            PInt temp_var_152;
+                            temp_var_152 = (PInt) new PInt(1000);
+                            var_$tmp20 = temp_var_152;
+                            
+                            PNamedTuple temp_var_153;
+                            temp_var_153 = (PNamedTuple) new PNamedTuple(
                                 List.of("sender", "receiver", "amount"), 
                                 Arrays.asList(var_$tmp18, var_$tmp19, var_$tmp20)
                             )
                             ;
-                            var_$tmp21 = temp_var_152;
+                            var_$tmp21 = temp_var_153;
                             
                             currentMachine.sendEvent(var_$tmp16, var_$tmp17, var_$tmp21);
                             
                         }
                         else {
                             // 'else' branch
-                            PMachineValue temp_var_153;
-                            temp_var_153 = (PMachineValue) var_engine;
-                            var_$tmp22 = temp_var_153;
+                            PMachineValue temp_var_154;
+                            temp_var_154 = (PMachineValue) var_engine;
+                            var_$tmp22 = temp_var_154;
                             
-                            Event temp_var_154;
-                            temp_var_154 = (Event) new Event(ePaymentReq);
-                            var_$tmp23 = temp_var_154;
-                            
-                            PInt temp_var_155;
-                            temp_var_155 = (PInt) new PInt(0);
-                            var_$tmp24 = temp_var_155;
+                            Event temp_var_155;
+                            temp_var_155 = (Event) new Event(ePaymentReq);
+                            var_$tmp23 = temp_var_155;
                             
                             PInt temp_var_156;
-                            temp_var_156 = (PInt) new PInt(1);
-                            var_$tmp25 = temp_var_156;
+                            temp_var_156 = (PInt) new PInt(0);
+                            var_$tmp24 = temp_var_156;
                             
                             PInt temp_var_157;
-                            temp_var_157 = (PInt) new PInt(100000);
-                            var_$tmp26 = temp_var_157;
+                            temp_var_157 = (PInt) new PInt(1);
+                            var_$tmp25 = temp_var_157;
                             
-                            PNamedTuple temp_var_158;
-                            temp_var_158 = (PNamedTuple) new PNamedTuple(
+                            PInt temp_var_158;
+                            temp_var_158 = (PInt) new PInt(100000);
+                            var_$tmp26 = temp_var_158;
+                            
+                            PNamedTuple temp_var_159;
+                            temp_var_159 = (PNamedTuple) new PNamedTuple(
                                 List.of("sender", "receiver", "amount"), 
                                 Arrays.asList(var_$tmp24, var_$tmp25, var_$tmp26)
                             )
                             ;
-                            var_$tmp27 = temp_var_158;
+                            var_$tmp27 = temp_var_159;
                             
                             currentMachine.sendEvent(var_$tmp22, var_$tmp23, var_$tmp27);
                             
@@ -1261,13 +1268,13 @@ public class XrpPaymentPModel implements PModel {
                     
                 }
                 
-                PInt temp_var_159;
-                temp_var_159 = (PInt) (var_paymentsLeft).sub(new PInt(1));
-                var_$tmp28 = temp_var_159;
-                
                 PInt temp_var_160;
-                temp_var_160 = (PInt) var_$tmp28;
-                var_paymentsLeft = temp_var_160;
+                temp_var_160 = (PInt) (var_paymentsLeft).sub(new PInt(1));
+                var_$tmp28 = temp_var_160;
+                
+                PInt temp_var_161;
+                temp_var_161 = (PInt) var_$tmp28;
+                var_paymentsLeft = temp_var_161;
                 
             }
             else {

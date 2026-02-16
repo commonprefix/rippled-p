@@ -1,0 +1,13 @@
+--test-method:testXrpPayment
+// Step 0: create GodMachine
+(0)
+// Step 1: start GodMachine
+(1)
+// Step 2: create Main(2)
+(1)
+// Step 3: boolean choice
+True
+// Step 4: schedule choice
+(2)
+// Step 5: schedule choice
+(2)

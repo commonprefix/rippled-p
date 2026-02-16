@@ -1,8 +1,8 @@
 project-name:                           XrpPayment
 mode:                                   random
-time-limit-seconds:                     0.0
+time-limit-seconds:                     10.0
 memory-limit-MB:                        0.0
-time-seconds:                           0.1
+time-seconds:                           0.2
 memory-max-MB:                          0.0
 memory-current-MB:                      0.0
 max-depth-explored:                     -1
@@ -12,7 +12,7 @@ max-depth-explored:                     -1
 #-distinct-states:                      0
 steps-min:                              -1
 steps-avg:                              0
-#-choices-unexplored:                   1
+#-choices-unexplored:                   3
 %-choices-unexplored-data:              100.0
 #-tasks-finished:                       0
 #-tasks-pending:                        0

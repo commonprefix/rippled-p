@@ -1,5 +1,5 @@
 --------------------
-pex.utils.exceptions.BugFoundException: Property violated: PSpec/XrpConservation.p:22:17 Receiver balance wrong: 5500 != 5000 + 500 + 1
+pex.utils.exceptions.BugFoundException: Property violated: PSpec/XrpConservation.p:22:17 Receiver balance wrong: 11000 != 10000 + 1000 + 1
 	at pex.utils.misc.Assert.fromModel(Assert.java:19)
 	at pex.utils.misc.Assert.fromModel(Assert.java:24)
 	at pex.model.XrpPaymentPModel$XrpConservation.Monitoring_ePaymentResp(XrpPaymentPModel.java:823)

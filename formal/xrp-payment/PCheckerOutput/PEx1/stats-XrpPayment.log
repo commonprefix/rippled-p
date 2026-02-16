@@ -1,0 +1,23 @@
+project-name:                           XrpPayment
+mode:                                   random
+time-limit-seconds:                     60.0
+memory-limit-MB:                        0.0
+time-seconds:                           0.1
+memory-max-MB:                          0.0
+memory-current-MB:                      0.0
+max-depth-explored:                     6
+#-schedules:                            64
+#-timelines:                            6
+#-states:                               172
+#-distinct-states:                      123
+steps-min:                              4
+steps-avg:                              5
+#-choices-unexplored:                   0
+%-choices-unexplored-data:              0.0
+#-tasks-finished:                       1
+#-tasks-pending:                        0
+ql-#-states:                            0
+ql-#-actions:                           0
+result:                                 correct for any depth
+status:                                 verified
+exit-code:                              0

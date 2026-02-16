@@ -1,7 +1,7 @@
 package XrpPayment.pobserve;
 
 /***************************************************************************
- * This file was auto-generated on Thursday, 12 February 2026 at 11:50:36.
+ * This file was auto-generated on Friday, 13 February 2026 at 11:07:46.
  * Please do not edit manually!
  **************************************************************************/
 
@@ -179,5 +179,173 @@ public class PMachines {
         } // hashCode()
         
     } // XrpConservation monitor definition
+    public static class XrpWrongConservation extends pobserve.runtime.Monitor<XrpWrongConservation.PrtStates> implements Serializable {
+        
+        public static class Supplier implements java.util.function.Supplier<XrpWrongConservation>, Serializable {
+            public XrpWrongConservation get() {
+                XrpWrongConservation ret = new XrpWrongConservation();
+                ret.ready();
+                return ret;
+            }
+        }
+        
+        
+        public enum PrtStates {
+            Monitoring_1
+        }
+        
+        public XrpWrongConservation() {
+            super();
+            addState(pobserve.runtime.State.keyedOn(PrtStates.Monitoring_1)
+                .isInitialState(true)
+                .withEvent(PEvents.ePaymentResp.class, this::Anon_1)
+                .build());
+        } // constructor
+        
+        public void reInitializeMonitor() {
+            registerState(pobserve.runtime.State.keyedOn(PrtStates.Monitoring_1)
+                .isInitialState(true)
+                .withEvent(PEvents.ePaymentResp.class, this::Anon_1)
+                .build());
+        }
+        
+        public java.util.List<Class<? extends pobserve.runtime.events.PEvent<?>>> getEventTypes() {
+            return java.util.Arrays.asList(PEvents.ePaymentResp.class);
+        }
+        
+        private void Anon_1(PTypes.PTuple_sndr_rcvr_amnt_fee_stts_sndrb_sndrb_rcvrb_rcvrb resp_1) {
+            PTypes.tPaymentStatus TMP_tmp0_1;
+            boolean TMP_tmp1_1;
+            long TMP_tmp2_1;
+            long TMP_tmp3_1;
+            long TMP_tmp4_1;
+            long TMP_tmp5_1;
+            long TMP_tmp6_1;
+            long TMP_tmp7_1;
+            boolean TMP_tmp8_1;
+            String TMP_tmp9_1;
+            long TMP_tmp10_1;
+            long TMP_tmp11_1;
+            long TMP_tmp12_1;
+            long TMP_tmp13_1;
+            String TMP_tmp14_1;
+            String TMP_tmp15_1;
+            long TMP_tmp16_1;
+            long TMP_tmp17_1;
+            long TMP_tmp18_1;
+            long TMP_tmp19_1;
+            long TMP_tmp20_1;
+            boolean TMP_tmp21_1;
+            String TMP_tmp22_1;
+            long TMP_tmp23_1;
+            long TMP_tmp24_1;
+            long TMP_tmp25_1;
+            String TMP_tmp26_1;
+            String TMP_tmp27_1;
+            long TMP_tmp28_1;
+            long TMP_tmp29_1;
+            boolean TMP_tmp30_1;
+            String TMP_tmp31_1;
+            String TMP_tmp32_1;
+            String TMP_tmp33_1;
+            long TMP_tmp34_1;
+            long TMP_tmp35_1;
+            boolean TMP_tmp36_1;
+            String TMP_tmp37_1;
+            String TMP_tmp38_1;
+            String TMP_tmp39;
+            
+            TMP_tmp0_1 = resp_1.status;
+            TMP_tmp1_1 = TMP_tmp0_1 == PTypes.tPaymentStatus.SUCCESS;
+            if (TMP_tmp1_1) {
+                TMP_tmp2_1 = resp_1.senderBalAfter;
+                TMP_tmp3_1 = resp_1.senderBalBefore;
+                TMP_tmp4_1 = resp_1.amount;
+                TMP_tmp5_1 = TMP_tmp3_1 - TMP_tmp4_1;
+                TMP_tmp6_1 = resp_1.fee;
+                TMP_tmp7_1 = TMP_tmp5_1 - TMP_tmp6_1;
+                TMP_tmp8_1 = TMP_tmp2_1 == TMP_tmp7_1;
+                if (TMP_tmp8_1) {
+                }
+                else
+                {
+                    TMP_tmp9_1 = "PSpec/XrpWrongConservation.p:20:17";
+                    TMP_tmp10_1 = resp_1.senderBalAfter;
+                    TMP_tmp11_1 = resp_1.senderBalBefore;
+                    TMP_tmp12_1 = resp_1.amount;
+                    TMP_tmp13_1 = resp_1.fee;
+                    TMP_tmp14_1 = java.text.MessageFormat.format("Sender balance wrong: {0} != {1} - {2} - {3}", TMP_tmp10_1, TMP_tmp11_1, TMP_tmp12_1, TMP_tmp13_1);
+                    TMP_tmp15_1 = java.text.MessageFormat.format("{0} {1}", TMP_tmp9_1, TMP_tmp14_1);
+                    tryAssert(TMP_tmp8_1, TMP_tmp15_1);
+                }
+                TMP_tmp16_1 = resp_1.receiverBalAfter;
+                TMP_tmp17_1 = resp_1.receiverBalBefore;
+                TMP_tmp18_1 = resp_1.amount;
+                TMP_tmp19_1 = TMP_tmp17_1 + TMP_tmp18_1;
+                TMP_tmp20_1 = TMP_tmp19_1 + 100L;
+                TMP_tmp21_1 = TMP_tmp16_1 == TMP_tmp20_1;
+                if (TMP_tmp21_1) {
+                }
+                else
+                {
+                    TMP_tmp22_1 = "PSpec/XrpWrongConservation.p:26:17";
+                    TMP_tmp23_1 = resp_1.receiverBalAfter;
+                    TMP_tmp24_1 = resp_1.receiverBalBefore;
+                    TMP_tmp25_1 = resp_1.amount;
+                    TMP_tmp26_1 = java.text.MessageFormat.format("Receiver balance wrong: {0} != {1} + {2} + 100", TMP_tmp23_1, TMP_tmp24_1, TMP_tmp25_1);
+                    TMP_tmp27_1 = java.text.MessageFormat.format("{0} {1}", TMP_tmp22_1, TMP_tmp26_1);
+                    tryAssert(TMP_tmp21_1, TMP_tmp27_1);
+                }
+            }
+            else
+            {
+                TMP_tmp28_1 = resp_1.senderBalAfter;
+                TMP_tmp29_1 = resp_1.senderBalBefore;
+                TMP_tmp30_1 = TMP_tmp28_1 == TMP_tmp29_1;
+                if (TMP_tmp30_1) {
+                }
+                else
+                {
+                    TMP_tmp31_1 = "PSpec/XrpWrongConservation.p:31:17";
+                    TMP_tmp32_1 = "Sender balance changed on failed payment";
+                    TMP_tmp33_1 = java.text.MessageFormat.format("{0} {1}", TMP_tmp31_1, TMP_tmp32_1);
+                    tryAssert(TMP_tmp30_1, TMP_tmp33_1);
+                }
+                TMP_tmp34_1 = resp_1.receiverBalAfter;
+                TMP_tmp35_1 = resp_1.receiverBalBefore;
+                TMP_tmp36_1 = TMP_tmp34_1 == TMP_tmp35_1;
+                if (TMP_tmp36_1) {
+                }
+                else
+                {
+                    TMP_tmp37_1 = "PSpec/XrpWrongConservation.p:33:17";
+                    TMP_tmp38_1 = "Receiver balance changed on failed payment";
+                    TMP_tmp39 = java.text.MessageFormat.format("{0} {1}", TMP_tmp37_1, TMP_tmp38_1);
+                    tryAssert(TMP_tmp36_1, TMP_tmp39);
+                }
+            }
+        }
+        
+        public String toString() {
+            StringBuilder sb = new StringBuilder("XrpWrongConservation");
+            sb.append("[");
+            sb.append("]");
+            return sb.toString();
+        } // toString()
+        
+        public boolean deepEquals(XrpWrongConservation other) {
+            return (true
+            );
+        } // deepEquals()
+        
+        public boolean equals(Object other) {
+            return (this.getClass() == other.getClass()) && this.deepEquals((XrpWrongConservation)other);
+        } // equals()
+        
+        public int hashCode() {
+            return Objects.hash();
+        } // hashCode()
+        
+    } // XrpWrongConservation monitor definition
     // StateMachine TestDriver elided 
 }
