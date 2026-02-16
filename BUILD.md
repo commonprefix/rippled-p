@@ -448,7 +448,7 @@ install ccache --version 4.11.3 --allow-downgrade`.
    For example, to build Debug, in the next command, replace "Release" with "Debug"
 
    ```
-   cmake -DCMAKE_TOOLCHAIN_FILE:FILEPATH=build/generators/conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Release -Dxrpld=ON -Dtests=ON ..
+   cmake -DCMAKE_TOOLCHAIN_FILE:FILEPATH=build/generators/conan_toolchain.cmake -DCMAKE_BUILD_TYPE=Debug -Dxrpld=ON -Dtests=ON ..
    ```
 
    Multi-config generators:
