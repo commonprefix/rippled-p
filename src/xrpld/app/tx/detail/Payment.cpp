@@ -18,7 +18,6 @@
 
 namespace {
 
-// Returns POBSERVE output stream, or nullptr if POBSERVE_LOG env var is not set.
 // File opened lazily on first call, stays open for process lifetime.
 std::ofstream*
 getPObserveStream()
@@ -33,7 +32,7 @@ getPObserveStream()
     std::call_once(flag, [] {
         if (auto const* path = std::getenv("POBSERVE_LOG"))
         {
-            stream.open(path, std::ios::app);
+            stream.open(path, std::ios::trunc);
             opened = stream.is_open();
         }
     });

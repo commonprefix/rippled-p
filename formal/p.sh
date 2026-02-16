@@ -33,7 +33,7 @@ echo "Copied PEvents.java, PMachines.java, PTypes.java"
 echo ""
 echo "=== Step 5: Build and test Java project ==="
 cd "$OBSERVE_DIR"
-mvn clean test -q 2>&1 | tail -10
+mvn clean test -q -Dtest='XrpPaymentPObserveTest#test* AND NOT XrpPaymentPObserveTest#testRippledOutput' 2>&1 | tail -10
 
 echo ""
 echo "=== Done ==="

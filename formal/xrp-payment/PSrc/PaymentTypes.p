@@ -1,11 +1,5 @@
-// PaymentTypes.p
 // Types and events modeling XRP-to-XRP direct payments in rippled.
-//
-// Simplifications vs. actual rippled:
-//   - No destination tag / deposit auth / credential checks
-//   - Failed payments don't charge fee (rippled tec results do charge fee)
-//   - No account creation (destination must pre-exist)
-//   - Reserve is a flat value, not based on owner count
+// Simplified - proof of concept for PObserve
 
 type tAccountId = int;
 

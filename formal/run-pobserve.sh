@@ -17,6 +17,8 @@ LOG_FILE="/tmp/pobserve_payment.log"
 
 RIPPLED="$REPO_ROOT/.build/xrpld"
 
+rm -f "$LOG_FILE"
+
 echo "=== Step 1: Run C++ PObservePayment test ==="
 POBSERVE_LOG="$LOG_FILE" "$RIPPLED" --unittest=PObservePayment 2>&1 | tail -50
 echo ""

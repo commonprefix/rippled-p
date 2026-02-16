@@ -1,9 +1,8 @@
 // TestDriver.p
 // Non-deterministic test driver for XRP payments.
 //
-// Uses $ (non-deterministic boolean) so the P checker explores all
-// combinations: 4 payment choices x 3 rounds = 64 execution paths,
-// covering success, failure, and both directions (A->B, B->A).
+// Uses choose() and $ so the P checker explores all combinations of
+// initial balances, payment choices, and rounds.
 
 machine TestDriver {
     var engine: machine;
@@ -12,13 +11,14 @@ machine TestDriver {
     start state Init {
         entry {
             var balances: map[tAccountId, int];
-            balances[0] = 10000;   // Account A: 10,000 drops
-            balances[1] = 5000;    // Account B: 5,000 drops
+            // choose(4) picks from {0,1,2,3}; scale to interesting balance range
+            balances[0] = choose(4) * 3000;
+            balances[1] = choose(4) * 3000;
 
             engine = new PaymentEngine((
                 balances = balances,
-                fee = 12,          // 12 drops (typical base fee)
-                reserve = 200,     // simplified reserve
+                fee = 12,          // Example base fee (should definitely use choose!)
+                reserve = 200,     // simplified reserve (move to choose)
                 client = this
             ));
 
@@ -31,13 +31,9 @@ machine TestDriver {
         entry {
             if (paymentsLeft > 0) {
                 if ($) {
-                    // Small payment A -> B (should succeed)
+                    // Payment A -> B (should succeed)
                     send engine, ePaymentReq,
-                        (sender = 0, receiver = 1, amount = 500);
-                } else if ($) {
-                    // Large payment A -> B (may fail after prior debits)
-                    send engine, ePaymentReq,
-                        (sender = 0, receiver = 1, amount = 9000);
+                        (sender = 0, receiver = 1, amount = (choose(5) + 1) * 5000);
                 } else if ($) {
                     // Reverse direction: B -> A
                     send engine, ePaymentReq,

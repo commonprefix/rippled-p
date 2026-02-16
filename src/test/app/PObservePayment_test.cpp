@@ -25,7 +25,7 @@ struct PObservePayment_test : public beast::unit_test::suite
         auto const bob = Account("bob");
 
         Env env(*this, testable_amendments());
-        env.fund(XRP(10000), alice, bob);
+        env.fund(XRP(20000), alice, bob);
         env.close();
 
         // Payment 1: alice -> bob, 100 XRP (success)

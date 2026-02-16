@@ -1,4 +1,3 @@
-// PaymentEngine.p
 // Models the core XRP-to-XRP payment logic from rippled's Payment::doApply().
 //
 // In rippled (Payment.cpp):

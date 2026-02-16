@@ -1,6 +1,3 @@
-// XrpConservation.p
-// Safety property: XRP is conserved across payments.
-//
 // For a successful payment of amount N with fee F:
 //   sender.after   == sender.before   - N - F
 //   receiver.after == receiver.before + N
