@@ -670,8 +670,7 @@ Payment::doApply()
 
     // Do the arithmetic for the transfer and make the ledger change.
     sleSrc->setFieldAmount(sfBalance, mSourceBalance - dstAmount);
-    sleDst->setFieldAmount(
-        sfBalance, sleDst->getFieldAmount(sfBalance) + dstAmount);
+    sleDst->setFieldAmount(sfBalance, sleDst->getFieldAmount(sfBalance) + dstAmount);
 
     // POBSERVE: log successful XRP direct payment
     if (auto* pobserve = getPObserveStream())
