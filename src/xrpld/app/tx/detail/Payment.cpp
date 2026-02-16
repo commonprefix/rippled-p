@@ -11,6 +11,70 @@
 #include <xrpl/protocol/TxFlags.h>
 #include <xrpl/protocol/jss.h>
 
+#include <chrono>
+#include <cstdlib>
+#include <fstream>
+#include <mutex>
+
+namespace {
+
+// Returns POBSERVE output stream, or nullptr if POBSERVE_LOG env var is not set.
+// File opened lazily on first call, stays open for process lifetime.
+std::ofstream*
+getPObserveStream()
+{
+    if (!std::getenv("POBSERVE_LOG"))
+        return nullptr;
+
+    static std::ofstream stream;
+    static std::once_flag flag;
+    static bool opened = false;
+
+    std::call_once(flag, [] {
+        if (auto const* path = std::getenv("POBSERVE_LOG"))
+        {
+            stream.open(path, std::ios::app);
+            opened = stream.is_open();
+        }
+    });
+
+    return opened ? &stream : nullptr;
+}
+
+void
+emitPObservePayment(
+    std::ofstream& out,
+    xrpl::AccountID const& sender,
+    xrpl::AccountID const& receiver,
+    std::int64_t amount,
+    std::int64_t fee,
+    bool success,
+    std::int64_t sbalBefore,
+    std::int64_t sbalAfter,
+    std::int64_t rbalBefore,
+    std::int64_t rbalAfter)
+{
+    using namespace std::chrono;
+    auto const ts =
+        duration_cast<milliseconds>(system_clock::now().time_since_epoch())
+            .count();
+
+    out << "POBSERVE|" << ts << "|PAYMENT"
+        << "|sender=" << toBase58(sender)
+        << "|receiver=" << toBase58(receiver)
+        << "|amount=" << amount
+        << "|fee=" << fee
+        << "|status=" << (success ? "SUCCESS" : "FAIL")
+        << "|sbal_before=" << sbalBefore
+        << "|sbal_after=" << sbalAfter
+        << "|rbal_before=" << rbalBefore
+        << "|rbal_after=" << rbalAfter
+        << "\n";
+    out.flush();
+}
+
+}  // namespace
+
 namespace xrpl {
 
 TxConsequences
@@ -542,6 +606,24 @@ Payment::doApply()
         JLOG(j_.trace()) << "Delay transaction: Insufficient funds: " << to_string(mPriorBalance) << " / "
                          << to_string(dstAmount.xrp() + mmm) << " (" << to_string(reserve) << ")";
 
+        // POBSERVE: log failed payment (simplified: report unchanged balances,
+        // even though tec results still charge the fee in rippled).
+        if (auto* pobserve = getPObserveStream())
+        {
+            auto const rbal = sleDst->getFieldAmount(sfBalance).xrp();
+            emitPObservePayment(
+                *pobserve,
+                account_,
+                dstAccountID,
+                dstAmount.xrp().drops(),
+                ctx_.tx.getFieldAmount(sfFee).xrp().drops(),
+                false,
+                mPriorBalance.drops(),
+                mPriorBalance.drops(),
+                rbal.drops(),
+                rbal.drops());
+        }
+
         return tecUNFUNDED_PAYMENT;
     }
 
@@ -584,9 +666,29 @@ Payment::doApply()
             return err;
     }
 
+    // Capture receiver balance before transfer (for POBSERVE).
+    auto const rbalBeforeTransfer = sleDst->getFieldAmount(sfBalance).xrp();
+
     // Do the arithmetic for the transfer and make the ledger change.
     sleSrc->setFieldAmount(sfBalance, mSourceBalance - dstAmount);
-    sleDst->setFieldAmount(sfBalance, sleDst->getFieldAmount(sfBalance) + dstAmount);
+    sleDst->setFieldAmount(
+        sfBalance, sleDst->getFieldAmount(sfBalance) + dstAmount);
+
+    // POBSERVE: log successful XRP direct payment
+    if (auto* pobserve = getPObserveStream())
+    {
+        emitPObservePayment(
+            *pobserve,
+            account_,
+            dstAccountID,
+            dstAmount.xrp().drops(),
+            ctx_.tx.getFieldAmount(sfFee).xrp().drops(),
+            true,
+            mPriorBalance.drops(),
+            (mSourceBalance - dstAmount.xrp()).drops(),
+            rbalBeforeTransfer.drops(),
+            (rbalBeforeTransfer + dstAmount.xrp()).drops());
+    }
 
     // Re-arm the password change fee if we can and need to.
     if ((sleDst->getFlags() & lsfPasswordSpent))

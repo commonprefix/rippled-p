@@ -6,6 +6,8 @@ import pobserve.commons.PObserveEvent;
 import pobserve.commons.Parser;
 import pobserve.runtime.events.PEvent;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Stream;
 
 /**
@@ -20,6 +22,19 @@ import java.util.stream.Stream;
  * Lines not starting with "POBSERVE|" are silently ignored (returns empty stream).
  */
 public class RipplePaymentParser implements Parser<PEvent<?>> {
+
+    // Maps base58 account addresses to sequential integer IDs for the P spec.
+    // Also handles plain integer IDs (backward compat with test logs).
+    private final Map<String, Long> accountIdMap = new HashMap<>();
+    private long nextAccountId = 0;
+
+    private long resolveAccountId(String value) {
+        try {
+            return Long.parseLong(value);
+        } catch (NumberFormatException e) {
+            return accountIdMap.computeIfAbsent(value, k -> nextAccountId++);
+        }
+    }
 
     @Override
     public Stream<PObserveEvent<PEvent<?>>> apply(Object logLineObj) {
@@ -51,8 +66,8 @@ public class RipplePaymentParser implements Parser<PEvent<?>> {
                 String[] kv = parts[i].split("=", 2);
                 if (kv.length != 2) continue;
                 switch (kv[0]) {
-                    case "sender":      sender     = Long.parseLong(kv[1]); break;
-                    case "receiver":    receiver   = Long.parseLong(kv[1]); break;
+                    case "sender":      sender     = resolveAccountId(kv[1]); break;
+                    case "receiver":    receiver   = resolveAccountId(kv[1]); break;
                     case "amount":      amount     = Long.parseLong(kv[1]); break;
                     case "fee":         fee        = Long.parseLong(kv[1]); break;
                     case "status":      status     = "SUCCESS".equals(kv[1])
